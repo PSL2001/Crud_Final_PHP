@@ -33,7 +33,17 @@ class Profesores extends Conexion {
         }
     }
     public function read() {
-        
+        $con = "select * from profesores where id=:id";
+        $stmt=parent::$conexion->prepare($con);
+
+        try {
+            $stmt->execute([
+                ':id'=>$this->id
+            ]);
+        } catch (PDOException $ex) {
+            die("Error al leer el profesor, ".$ex->getMessage());
+        }
+        return $stmt;
     }
     public function update() {
         
@@ -53,7 +63,7 @@ class Profesores extends Conexion {
 
     //Metodo para devolver todos los datos de Profesores
     public function devolverTodo() {
-        $con="select * from profesores, departamentos where dep=departamentos.id";
+        $con="select * from profesores";
         $stmt=parent::$conexion->prepare($con);
         try{
             $stmt->execute();

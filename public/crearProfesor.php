@@ -73,7 +73,7 @@ if (isset($_POST['crear'])) {
     <body style="background: cadetblue;">
         <h3 class="text-center mt-2">Profesores</h3>
         <div class="container mt-3">
-            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" class="form-control w-25">
+            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" class="form-control w-25 mx-auto">
                 <div class="mt-2">
                     <input type="text" name="nom_prof" placeholder="Nombre del profesor" class="form-control" required>
                 </div>

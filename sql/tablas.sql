@@ -1,5 +1,5 @@
-drop table profesores if exists;
-drop table departamentos if exists;
+drop table if exists profesores ;
+drop table if exists departamentos ;
 -- Tablas
 create table departamentos(
     id int auto_increment primary key,

@@ -40,6 +40,21 @@ class Departamentos extends Conexion {
         }
         return $stmt;
     }
+
+    //Metodo para devolver el departamento
+    public function devolverDepartamento() {
+        $con = "select nom_dep from departamentos where id=:i";
+        $stmt=parent::$conexion->prepare($con);
+
+        try {
+            $stmt->execute([
+                ':i'=>$this->id
+            ]);
+        } catch (PDOException $ex) {
+            die("Error al devolver el departamento, ".$ex->getMessage());
+        }
+        return $stmt;
+    }
     //-------------------------------------------------------------------------------------------
 
     /**

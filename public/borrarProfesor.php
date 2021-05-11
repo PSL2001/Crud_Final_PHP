@@ -12,5 +12,5 @@ $esteProfe = new Profesores();
 $esteProfe->setId($_POST['id']);
 $esteProfe->delete();
 $esteProfe = null;
-$_SESSION['mensaje'] = "Post Borrado Correctamente";
-header("Location:posts.php");
+$_SESSION['mensaje'] = "Profesor Borrado Correctamente";
+header("Location:profesores.php");
