@@ -16,11 +16,48 @@ $miProfe = $esteProfesor->read();
 $fila = $miProfe->fetch(PDO::FETCH_OBJ);
 
 $esteDep = new Departamentos();
-$esteDep->setId($miProfe->dep);
+$esteDep->setId($id);
 $miDep = $esteDep->devolverDepartamento();
+die();
 $fila2 = $miDep->fetch(PDO::FETCH_OBJ);
 
+
 if (isset($_POST['editar'])) {
+    if (isset($_POST['nom_prof'])) {
+        $nom_prof = $_POST['nom_prof'];
+        if (strlen($nom_prof) == 0) {
+            $_SESSION['mensaje'] = "Rellena el nombre";
+            header("Location:{$_SERVER['PHP_SELF']}id=$id");
+            die();
+        }
+    }
+
+    if (isset($_POST['sueldo'])) {
+        $sueldo = $_POST['sueldo'];
+        if (strlen($sueldo) == 0) {
+            $_SESSION['mensaje'] = "Rellena el sueldo";
+            header("Location:{$_SERVER['PHP_SELF']}id=$id");
+            die();
+        }
+    }
+
+    if (isset($_POST['fecha_prof'])) {
+        $fecha_prof = $_POST['fecha_prof'];
+        if (strlen($fecha_prof) == 0) {
+            $_SESSION['mensaje'] = "Rellena la fecha";
+            header("Location:{$_SERVER['PHP_SELF']}id=$id");
+            die();
+        }
+    }
+
+    if (isset($_POST['dep'])) {
+        $dep = $_POST['dep'];
+        if (strlen($dep) == 0) {
+            $_SESSION['mensaje'] = "Rellena los campos";
+            header("Location:{$_SERVER['PHP_SELF']}id=$id");
+            die();
+        }
+    }
 } else {
 ?>
     <!DOCTYPE html>
@@ -39,9 +76,9 @@ if (isset($_POST['editar'])) {
     <body style="background: cadetblue;">
         <h3 class="text-center mt-2">Profesores</h3>
         <div class="container mt-3">
-            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" class="form-control w-25 mx-auto">
+            <form action="<?php echo $_SERVER['PHP_SELF']."?id=$id"; ?>" method="post" class="form-control w-25 mx-auto">
                 <div class="mt-2">
-                    <input type="text" name="nom_prof" value="<?php echo $fila->nom_prof ?> class="form-control" required>
+                    <input type="text" name="nom_prof" value="<?php echo $fila->nom_prof ?>" class="form-control" required>
                 </div>
                 <div class="mt-2">
                     <input type="number" name="sueldo" value="<?php echo $fila->sueldo ?>" class="form-control" required>

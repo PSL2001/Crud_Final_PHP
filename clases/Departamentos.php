@@ -41,7 +41,17 @@ class Departamentos extends Conexion {
         return $stmt;
     }
     public function update() {
+        $con = "update departamentos set nom_dep=:n where id=:i";
+        $stmt=parent::$conexion->prepare($con);
         
+        try {
+            $stmt->execute([
+                ':i'=>$this->id,
+                ':n'=>$this->nom_dep
+            ]);
+        } catch (PDOException $ex) {
+            die("Error al actualizar el departamento, ".$ex->getMessage());
+        }
     }
     public function delete() {
         $con = "delete from departamentos where id=:i";

@@ -46,7 +46,16 @@ class Profesores extends Conexion {
         return $stmt;
     }
     public function update() {
+        $con = "update profesores set nom_prof=:n, ";
+        $stmt=parent::$conexion->prepare($con);
         
+        try {
+            $stmt->execute([
+                ':n'=>$this->nom_dep
+            ]);
+        } catch (PDOException $ex) {
+            die("Error al actualizar el departamento, ".$ex->getMessage());
+        }
     }
     public function delete() {
         $con = "delete from profesores where id=:i";
