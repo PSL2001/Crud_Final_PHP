@@ -21,7 +21,7 @@ if (isset($_POST['crear'])) {
     
     $esteDep->create();
     $esteDep = null;
-    $_SESSION['mensaje'] = "Profesor creado con exito";
+    $_SESSION['mensaje'] = "Departamento creado con exito";
     header("Location:departamentos.php");
 } else {
 ?>
