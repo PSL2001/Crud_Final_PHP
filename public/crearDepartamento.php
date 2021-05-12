@@ -16,13 +16,18 @@ if (isset($_POST['crear'])) {
             die();
         }
     }
-
     $esteDep = new Departamentos();
-    $esteDep->setNom_dep(strtoupper($nom_dep));
-    $esteDep->create();
-    $esteDep = null;
-    $_SESSION['mensaje'] = "Departamento creado con exito";
-    header("Location:departamentos.php");
+    if (!$esteDep->existeDepartamento(strtoupper($nom_dep))) {
+        $esteDep->setNom_dep(strtoupper($nom_dep));
+        $esteDep->create();
+        $esteDep = null;
+        $_SESSION['mensaje'] = "Departamento creado con exito";
+        header("Location:departamentos.php");
+    } else {
+        $_SESSION['mensaje'] = "Este departamento ya existe";
+        header("Location:{$_SERVER['PHP_SELF']}");
+        die();
+    }
 } else {
 ?>
     <!DOCTYPE html>
@@ -41,13 +46,16 @@ if (isset($_POST['crear'])) {
     <body style="background: cadetblue;">
         <h3 class="text-center mt-2">Profesores</h3>
         <div class="container mt-3">
+            <?php
+            require './resources/mensaje.php';
+            ?>
             <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" class="form-control w-25 mx-auto">
                 <div class="mt-2">
                     <input type="text" name="nom_dep" placeholder="Nombre del departamento" class="form-control" required>
                 </div>
                 <div class="mt-2">
-                    <input type="submit" name="crear" class="btn btn-success" value="Crear"/>
-                    <input type="reset" value="Limpiar" class="btn btn-danger"/>
+                    <input type="submit" name="crear" class="btn btn-success" value="Crear" />
+                    <input type="reset" value="Limpiar" class="btn btn-danger" />
                     <a href="departamentos.php" class="btn btn-primary"><i class="fas fa-home"></i> Volver</a>
                 </div>
             </form>

@@ -83,6 +83,21 @@ class Departamentos extends Conexion {
         }
         return $stmt;
     }
+
+    //Metodo para comprobar que existe el departamento
+    public function existeDepartamento($dep) {
+        $c="select * from departamentos where nom_dep=:n";
+        $stmt=parent::$conexion->prepare($c);
+        try{
+            $stmt->execute([
+                ':n'=>$dep
+            ]);
+        }catch(PDOException $ex){
+            die("Error al comprobar existencia del departamento: ". $ex->getMessage());
+        }
+        $fila=$stmt->fetch(PDO::FETCH_OBJ);
+        return ($fila==null) ? false : true;
+    }
     //-------------------------------------------------------------------------------------------
 
     /**
