@@ -8,9 +8,9 @@ use Clases\Departamentos;
 
 if (isset($_POST['crear'])) {
 
-    if (isset($_POST['nom_prof'])) {
-        $nom_prof = $_POST['nom_prof'];
-        if (strlen($nom_prof) == 0) {
+    if (isset($_POST['nom_dep'])) {
+        $nom_dep = $_POST['nom_dep'];
+        if (strlen($nom_dep) == 0) {
             $_SESSION['mensaje'] = "Rellena los campos";
             header("Location:{$_SERVER['PHP_SELF']}");
             die();
@@ -18,7 +18,7 @@ if (isset($_POST['crear'])) {
     }
 
     $esteDep = new Departamentos();
-    
+    $esteDep->setNom_dep(strtoupper($nom_dep));
     $esteDep->create();
     $esteDep = null;
     $_SESSION['mensaje'] = "Departamento creado con exito";
@@ -43,7 +43,7 @@ if (isset($_POST['crear'])) {
         <div class="container mt-3">
             <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" class="form-control w-25 mx-auto">
                 <div class="mt-2">
-                    <input type="text" name="nom_prof" placeholder="Nombre del departamento" class="form-control" required>
+                    <input type="text" name="nom_dep" placeholder="Nombre del departamento" class="form-control" required>
                 </div>
                 <div class="mt-2">
                     <input type="submit" name="crear" class="btn btn-success" value="Crear"/>

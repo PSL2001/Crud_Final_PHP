@@ -16,7 +16,16 @@ class Departamentos extends Conexion {
 
     //-----------------------------CRUD----------------------------------------------------------
     public function create() {
+        $con = "insert into departamentos(nom_dep) values(:n)";
+        $stmt=parent::$conexion->prepare($con);
 
+        try {
+            $stmt->execute([
+                ':n'=>$this->nom_dep
+            ]);
+        } catch (PDOException $ex) {
+            die("Error al crear el departamento, ".$ex->getMessage());
+        }
     }
     public function read() {
         
