@@ -16,10 +16,10 @@ $miProfe = $esteProfesor->read();
 $fila = $miProfe->fetch(PDO::FETCH_OBJ);
 
 $esteDep = new Departamentos();
-$esteDep->setId($id);
-$miDep = $esteDep->devolverDepartamento();
-die();
+$miDep = $esteDep->read();
 $fila2 = $miDep->fetch(PDO::FETCH_OBJ);
+//Aqui deberia coger el id de departamentos pero peta la pagina
+$esteDep->setId($fila2->id);
 
 
 if (isset($_POST['editar'])) {
