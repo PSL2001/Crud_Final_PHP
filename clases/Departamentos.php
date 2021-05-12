@@ -28,7 +28,17 @@ class Departamentos extends Conexion {
         }
     }
     public function read() {
-        
+        $con = "select * from departamentos where id=:id";
+        $stmt=parent::$conexion->prepare($con);
+
+        try {
+            $stmt->execute([
+                ':id'=>$this->id
+            ]);
+        } catch (PDOException $ex) {
+            die("Error al leer el departamento, ".$ex->getMessage());
+        }
+        return $stmt;
     }
     public function update() {
         
