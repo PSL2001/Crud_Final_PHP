@@ -34,7 +34,16 @@ class Departamentos extends Conexion {
         
     }
     public function delete() {
-        
+        $con = "delete from departamentos where id=:i";
+        $stmt=parent::$conexion->prepare($con);
+
+        try {
+            $stmt->execute([
+                ':i'=>$this->id
+            ]);
+        } catch (PDOException $ex) {
+            die("Error al borrar el departamento," .$ex->getMessage());
+        }
     }
 
     //Metodo para devolver todos los datos de Departamentos
